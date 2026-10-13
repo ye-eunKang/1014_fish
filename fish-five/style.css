@@ -1,0 +1,345 @@
+/* 수정 안내
+ * 위치: left(왼쪽), top(위쪽) / 크기: width(너비), height(높이)
+ * % 값은 390 × 844 디자인 화면에 대한 비율입니다.
+ * 말풍선 등장 시간: .intro-one, .intro-two의 animation 마지막 값
+ * 배경 회전 효과: #rays / 물고기 크기: .fish
+ */
+/* 1. 공통 색상과 기본 화면 */
+:root {
+  color-scheme:light;
+  font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  background:#193d48;
+  color:#073c45;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+
+button {
+  font:inherit;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:focus-visible {
+  outline:3px solid #ffed39;
+  outline-offset:5px;
+}
+
+[hidden] {
+  display:none!important;
+}
+
+/* 2. 화면 비율: 디자인을 자르지 않고 비율 유지 */
+#stage {
+  position:relative;
+  width:min(100vw,46.214vh);
+  width:min(100vw,46.214svh);
+  aspect-ratio:390/844;
+  background:#2faad3;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+.scene {
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+}
+
+.art {
+  position:absolute;
+  display:block;
+  object-fit:contain;
+  user-select:none;
+  pointer-events:none;
+}
+
+/* 3. 시작 말풍선 */
+.intro-one {
+  left:6.154%;
+  top:1.659%;
+  width:65.128%;
+  animation:pop .5s both .25s;
+}
+
+.intro-two {
+  left:26.667%;
+  top:15.877%;
+  width:69.231%;
+  animation:pop .5s both 1.5s;
+}
+
+.quiet {
+  background:#faffdeeb;
+  border:1px solid #ffffff80;
+  border-radius:24px;
+  padding:10px 18px;
+  font-size:12px;
+  color:#07555d;
+  box-shadow:0 3px 0 #11617a30;
+}
+
+.quiet:active {
+  transform:translateY(2px);
+}
+
+#start {
+  position:absolute;
+  bottom:9%;
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  animation:fade .6s both 2.6s;
+}
+
+/* 4. 수도꼭지 화면 */
+.instruction {
+  left:5.897%;
+  top:11.256%;
+  width:88.974%;
+}
+
+.tap-card {
+  position:absolute;
+  left:7.44%;
+  top:24.65%;
+  width:85.13%;
+  height:40.76%;
+  padding:0;
+  border:6px solid #0c7185;
+  border-radius:11%;
+  overflow:hidden;
+  background:linear-gradient(90deg,#ffeb83 0 38%,#2bc79b 38%);
+  box-shadow:none;
+}
+
+.tap-card:disabled {
+  cursor:default;
+}
+
+.shadow {
+  position:absolute;
+  background:#ad941d;
+  clip-path:polygon(60% 0,100% 3%,35% 100%,0 100%,0 49%);
+  left:0;
+  top:27%;
+  height:73%;
+  width:37%;
+}
+
+#tap {
+  position:absolute;
+  left:12.5%;
+  top:7%;
+  width:46%;
+  height:auto;
+  pointer-events:none;
+}
+
+#hose {
+  position:absolute;
+  left:42.6%;
+  top:40%;
+  width:20%;
+  height:66%;
+  pointer-events:none;
+}
+
+.drop {
+  position:absolute;
+  left:42.82%;
+  top:68%;
+  width:14.36%;
+  height:12.2%;
+}
+
+#fill {
+  transition:y .55s ease;
+}
+
+/* 5. 물고기 등장과 방사형 배경 */
+#rays {
+  position:absolute;
+  width:222%;
+  height:auto;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) rotate(0deg);
+  transition:transform .55s steps(5,end);
+  pointer-events:none;
+}
+
+.fish-name {
+  left:23.5%;
+  top:30.4%;
+  width:48%;
+  animation:pop .5s both .2s;
+}
+
+.fish {
+  left:23%;
+  top:38.9%;
+  width:56%;
+  animation:pop .65s both .4s;
+}
+
+.awake {
+  left:13.077%;
+  top:66.351%;
+  width:73.333%;
+  animation:pop .5s both 1s;
+}
+
+.level {
+  left:9.487%;
+  top:65.877%;
+  width:80%;
+  animation:pop .4s both;
+}
+
+.sensor-panel {
+  position:absolute;
+  bottom:2.5%;
+  width:100%;
+  text-align:center;
+  padding:0 12px;
+}
+
+.sensor-panel p {
+  font-size:11px;
+  margin:7px 0;
+  line-height:1.5;
+}
+
+.secondary {
+  font-size:11px;
+  background:#e4f7ff;
+}
+
+/* 6. 마지막 기다림 화면 */
+#ocean {
+  background:linear-gradient(#c5edf6,#2faad3);
+}
+
+.waiting {
+  left:17.949%;
+  top:1.54%;
+  width:65.128%;
+  animation:pop .5s both;
+}
+
+#bubbles {
+  position:absolute;
+  inset:0;
+}
+
+.bubble {
+  position:absolute;
+  animation:drift 6s ease-in-out infinite alternate;
+  opacity:.8;
+}
+
+#restart {
+  position:absolute;
+  bottom:3%;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:11px;
+  opacity:.8;
+}
+
+#balanceHint {
+  position:absolute;
+  bottom:12%;
+  width:100%;
+  text-align:center;
+  font-size:12px;
+}
+
+#fishVideo {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.sr {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+/* 7. 애니메이션 */
+@keyframes pop {
+  from {
+    opacity:0;
+    scale:.8;
+    translate:0 12px;
+  }
+  to {
+    opacity:1;
+    scale:1;
+    translate:0 0;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+
+@keyframes drift {
+  from {
+    translate:0 12px;
+  }
+  to {
+    translate:8px -15px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .art,.bubble,#start {
+    animation-duration:.01s;
+    animation-delay:0s;
+  }
+  /* 5. 물고기 등장과 방사형 배경 */
+#rays {
+    transition:none;
+  }
+}
+
+@media(max-width:600px) {
+  body {
+    background:#2faad3;
+  }
+}
+
+@media(orientation:landscape) and (max-height:500px) {
+  /* 2. 화면 비율: 디자인을 자르지 않고 비율 유지 */
+#stage {
+    width:46.214svh;
+  }
+}
+

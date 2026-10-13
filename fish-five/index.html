@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#2faad3">
+    <title>물고기는 어디에 · 해포리고기</title>
+    <meta name="description" content="수도꼭지를 돌리고, 잠시 멈춰 물고기를 만나보세요.">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main id="stage" aria-label="물고기는 어디에">
+      <!-- 1. 시작 화면 — 말풍선 이미지와 시작 버튼 -->
+      <section id="intro" class="scene">
+        <img class="art intro-one" src="assets/intro1.png" alt="이 물고기… 물을 주면 깨어날지도 몰라!">
+        <img class="art intro-two" src="assets/intro2.png" alt="네가 수도꼭지를 돌려주면 내가 물고기를 구해볼게!">
+        <button id="start" class="quiet">화면을 눌러 시작하기</button>
+      </section>
+      <!-- 2. 수도꼭지 화면 — 클릭 영역, 호스, 물방울 -->
+      <section id="water" class="scene" hidden>
+        <img class="art instruction" src="assets/instruction.png" alt="수도꼭지를 돌려 소녀를 도와주세요">
+        <button id="tapButton" aria-label="수도꼭지 돌리기" class="tap-card">
+          <span class="shadow">
+          </span>
+          <img id="hose" src="assets/hose-0.png" alt="" draggable="false">
+          <img id="tap" src="assets/tap-0.png" alt="수도꼭지" draggable="false">
+        </button>
+        <svg class="drop" viewBox="0 0 64 110" role="img" aria-label="물방울 채우기">
+          <defs>
+            <clipPath id="dropClip">
+              <path d="M32 5C25 18 5 51 5 77C5 115 59 115 59 77C59 51 39 18 32 5Z"/>
+            </clipPath>
+          </defs>
+          <path d="M32 5C25 18 5 51 5 77C5 115 59 115 59 77C59 51 39 18 32 5Z" fill="white"/>
+          <g clip-path="url(#dropClip)">
+            <rect id="fill" x="0" y="110" width="64" height="110" fill="#10a192"/>
+          </g>
+          <path d="M32 5C25 18 5 51 5 77C5 115 59 115 59 77C59 51 39 18 32 5Z" fill="none" stroke="#b0e1ff" stroke-width="5"/>
+        </svg>
+        <p id="count" class="sr" aria-live="polite">물을 3번 주세요</p>
+      </section>
+      <!-- 3. 물고기 등장 / 수평 안내 화면 -->
+      <section id="reveal" class="scene" hidden>
+        <img id="rays" src="assets/rays.svg" alt="">
+        <img id="fishName" class="art fish-name" src="assets/name.svg" alt="해포리고기">
+        <img id="fish" class="art fish" src="assets/fish.svg" alt="초록색 해포리고기">
+        <img id="message" class="art awake" src="assets/awake.png" alt="물고기의 몸에 물이 닿자, 물고기가 깨어났어요!">
+        <div id="sensorPanel" class="sensor-panel" hidden>
+          <button id="enableMotion" class="quiet">수평 감지 시작하기</button>
+          <p id="sensorNote">
+          </p>
+          <button id="simulate" class="quiet secondary" hidden>PC 미리보기 · 수평으로 들기</button>
+        </div>
+      </section>
+      <!-- 4. 기다림 화면 — 영상은 추후 추가 -->
+      <section id="ocean" class="scene" hidden>
+        <div id="bubbles" aria-hidden="true">
+        </div>
+        <img class="art waiting" src="assets/waiting.png" alt="물고기가 헤엄칠 수 있도록 우리 잠시 기다려보자">
+        <p id="balanceHint" hidden>휴대폰을 수평으로 유지해주세요</p>
+        <video id="fishVideo" playsinline muted hidden>
+        </video>
+        <button id="restart" class="quiet">처음으로</button>
+      </section>
+    </main>
+    <p id="live" class="sr" aria-live="polite">
+    </p>
+    <script src="app.js">
+    </script>
+  </body>
+</html>
